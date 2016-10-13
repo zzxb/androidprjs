@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="zzxb.me.layoutdemo.TableLayoutActivity">
+
+    <!--
+    android:collapseColumns="1,3" 隐藏第二列和第4列的按钮
+    android:stretchColumns="0,2,4" 第一列和三列以及第五列的空白textview被拉伸
+    android:shrinkColumns="1,3"  第二列和第4列的按钮被收缩
+    -->
+
+    <TableLayout
+        android:stretchColumns="0,2,4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <EditText
+            android:hint="请输入用户名"
+            android:textSize="15sp"
+            android:layout_margin="6dp"
+            android:background="@drawable/corner_round"
+            android:drawableLeft="@mipmap/account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:hint="请输入密码"
+            android:layout_margin="6dp"
+            android:textSize="15sp"
+            android:inputType="textPassword"
+            android:background="@drawable/corner_round"
+            android:drawableLeft="@mipmap/passwowrd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:text="登录"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:text="注册"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

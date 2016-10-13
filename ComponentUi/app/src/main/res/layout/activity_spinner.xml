@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_spinner"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="zzxb.me.componentui.SpinnerActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="弹出的Spinner" />
+
+    <Spinner
+        android:id="@+id/spinnerBase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dialog" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="下拉的Spinner（默认）" />
+
+    <Spinner
+        android:id="@+id/spinnerBase1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="entries绑定数据源" />
+
+    <Spinner
+        android:id="@+id/spinnerBase2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/beijing" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="弹出带标题的Dialog，并且使用entries绑定数据源" />
+
+    <Spinner
+        android:id="@+id/spinnerBase3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/beijing"
+        android:prompt="@string/beij_prompt"
+        android:spinnerMode="dialog" />
+</LinearLayout>

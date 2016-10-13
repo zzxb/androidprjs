@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">LayoutDemo</string>
+    <string name="linear_name">线性布局</string>
+    <string name="table_name">表格布局</string>
+    <string name="frame_name">帧布局</string>
+    <string name="relative_name">相对布局</string>
+    <string name="abslayout_name">绝对布局</string>
+    <string name="movie_desc">movie_desc</string>
+    <string name="pause_desc">pause_desc</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_activity_index">IndexActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>

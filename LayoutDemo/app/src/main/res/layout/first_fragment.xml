@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:background="#f60000">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="REALTOR "
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal"
+        android:textSize="40dp"
+        android:layout_marginTop="20dp"
+        android:textColor="#fff" />
+
+
+    <ImageView
+        android:layout_width="498dp"
+        android:layout_height="316dp"
+        android:id="@+id/imageView3"
+        android:src="@drawable/image7" />
+
+    <TextView
+        android:layout_width="221dp"
+        android:layout_height="40dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Find your perfect home ..."
+        android:id="@+id/textView2"
+        android:layout_marginLeft="75dp"
+        android:textColor="#fff" />
+
+</LinearLayout>
