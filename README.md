@@ -59,18 +59,109 @@ Android Studio除了要下载Gradle，还需要下载一个插件[gradle-plugin]
 
 #### Android Studio的使用
 
-6.import与include的区别：<br/>
+1.首页介绍，如下图：
 
-import检查是否有重复包含的类库，如果有，则忽略。<br/>
+![](images/android-prjlist.png)
 
-include不检查是否有重复的类库。<br/>
+2.新建工程，已在安装Android Studio中介绍了。
+
+3.打开已存在的工程。如下图：
+
+![](images/android-openprj.png)
+
+4.进入主界面，各Bar介绍
+
+![](images/android-asui.png)
+
+5.菜单栏，如下图：
+
+![](images/android-menu.png)
+
+6.工程项目透视图有多种，常用两种，如下图：
+
+![](images/android-struts.png) ![](images/android-projects.png)
+
+7.代码编辑区，如下图：
+
+![](images/android-coding.png)
+
+8.用于观察后台日志或监控程序执行过程以及性能的监控控制台，如下图：
+
+![](images/android-logs.png)
+
+9.对Gradle自动构建手动的操作，使用Gradle生命周期控制台，如下图:
+
+![](images/android-gradle-life.png)
+
+######  以上就是对于Android Studio IDE界面的介绍，下面我们来看看，基于Android Studio的目录结构。
+
+首先，Android Studio中没有像Eclipse或MyEclipse中WorkSpace(工作空间)的概念，只有工程或项目的概念，在Android Studio中的工程包含多个Moudle(模块).每个模块都可以独立运行或被引用。Android Studio强烈建议一个工程或项目多Moudle(模块)的设计，这样更加的便于维护和开发。
+
+那么，我们来看一下目录结构，以及它们的作用。
+
+1.我们再来回顾一下Android工程透视图,如下图：
+
+![](images/android-struts.png)
+
+app模块是我们关注的重点
+
+2.mainifests目录下mainifest.xml，如下图:
+
+![](images/android-mainifest.png)
+
+该文件是每个android程序中必须的文件。它位于整个项目的根目录，描述了package中暴露的组件（activities, services, 等等），他们各自的实现类，各种能被处理的数据和启动位置。 除了能声明程序中的Activities, ContentProviders, Services, 和Intent Receivers,还能指定permissions和instrumentation（安全控制和测试），同时用于控制Android应用的名称、图标、访问权限等整体属性。
+
+3.java目录是源代码目录，如下图:
+
+![](images/android-javadir.png)
+
+4.res目录是所有android模块下所有资源文件的集合，比如：layout布局xml配置文件，图片资源文件集合，资源信息或国际化配置信息文件。
+
+![](images/android-res.png)
+
+那么，我们逐个看一下各个子目录作用以及文件。
+
+###### drawable目录，将图片等资源放在drawable-hdip中，将一些和XML文件相关的内容（图片选择器、文字颜色选择器、自定义形状等）放在drawable中。
+
+![](images/android-drawalbe.png)
+
+###### layout目录，放置所有界面的布局xml文件。
+
+![](images/android-layoutxmls.png)
+
+###### 具体布局样例，如图：
+
+![](images/android-layout.png)
+
+###### mipmap目录，用于存放原生图片（图ic_launcher.png），缩放上有性能优化; 
+
+![](images/android-minmap.png)
+
+###### values目录，讲所有字符串资源文件，颜色等资源文件
+
+![](images/android-values.png)
+
+###### strings.xml 字符串资源文件
+
+![](images/android-strings.png)
+
+###### colors.xml 颜色资源文件
+
+![](images/android-colors.png)
+
+###### dimens.xml 颜色资源文件
+
+![](images/android-dimens.png)
+
+5.Gradle Script目录，关于所有Gradle的配置文件。
+
+![](images/android-gradles.png)
 
 另外，import “”与<>区别:
 
 "":用于引入内部第三方类或类库
 
 <>:用于引用系统类或类库
-
 
 
 #### 2.ocprj4之指针以及引用
