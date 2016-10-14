@@ -39,6 +39,8 @@ V 1.0.0
 
 参考[安装与配置](http://stormzhang.com/devtools/2014/11/25/android-studio-tutorial1/)
 
+![](images/android-colors.png)
+
 #### 关于Gradle知识的了解
 
 在首次安装Android Studio或首次创建Android工程时，会自动下载一个软件，你会发现很慢，甚至你会认为软件处于假死状态，请注意，不要强制关闭软件，因为这样会导致日后工程不能使用等问题。那么，到底是自动下载什么呢？为什么这么慢呢？
