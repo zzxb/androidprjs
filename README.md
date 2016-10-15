@@ -34,6 +34,8 @@ V 1.0.0
 
 1.[下载android studio IDE](http://www.android-studio.org/index.php/download/androidstudio-download-baidudisk/)<br>
 2.熟悉最基本的面向对象语言开发JAVA<br/>
+3.学习android开发的知识体系，如下图<br>
+![](images/android-mind1.png)
 
 #### android studio 开发工具的安装
 
@@ -157,18 +159,45 @@ app模块是我们关注的重点
 
 ![](images/android-gradles.png)
 
-另外，import “”与<>区别:
+###### build.gradle(project)
 
-"":用于引入内部第三方类或类库
+设置整个工程的gradle配置文件
 
-<>:用于引用系统类或类库
+###### build.gradle(Module)
 
+设置工程中某个模块的gradle配置文件，这个文件是我们关注的重点，尤其是当我们引入第三方类库时，要在这个文件中配置。如下图：
 
-#### 2.ocprj4之指针以及引用
+![](images/android-gradle-app.png)
 
-1.什么是指针？<br/>
+###### gradle-wrapper.properties
 
-在内存中，任何一个变量都可以看成由三部分组成：变量名，值，以及存放该值的地址。<br/>
+配置gradle的基本信息，例如：安装目录等信息。一般，我们很少修改。
+
+###### gradle.properties
+
+配置gradle编译运行以及性能的配置文件
+
+###### local.properties
+
+配置android sdk目录位置
+
+#### 关于android运行
+
+对于android程序运行，目前有两种方式：虚拟机和真机运行
+
+虚拟机，这种方式可以在android studio中配置，也可以直接使用第三方虚拟机，比如：[genymotion](https://www.genymotion.com/)和[海马玩](http://droid4x.haimawan.com/)等.介于genymotion访问速度非常慢的原因，大家也可以使用海马玩。第三方虚拟机的方式不需要配置安装直接运行，android studio会以真机运行方式执行安装和运行。
+
+真机运行，这种方式用USB线连接电脑的方式直接安装运行。
+
+##### 我建议使用这种方式，因为真机运行可以更准确的测试程序兼容性、性能等情况。
+
+###### 推荐一个基于chrome的第三方插件-Vysor,这是一个可以将真机屏幕投射到电脑上的插件，可以用于演示项目。
+
+#### 1. LayoutDemo之android布局
+
+1.有哪些布局类型？<br/>
+
+Android系统中为我们提供的五大布局：LinearLayout(线性布局)、FrameLayout(单帧布局)、AbsoluteLayout(绝对布局)、TablelLayout(表格布局)、RelativeLayout(相对布局)。其中最常用的的是LinearLayout、TablelLayout和RelativeLayout。这些布局都可以嵌套使用。<br/>
 
 如果有一个变量，里面存储的值等于另外一个变量的地址值，则，可以把这个变量看做指针。<br/>
 

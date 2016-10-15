@@ -33,7 +33,7 @@
     <dimen name="spa260">174dp</dimen>
     <dimen name="spa130">87dp</dimen>
     <dimen name="contract">72dp</dimen>
-    <!-- 投资列表中checkbox间距 -->
+
     <dimen name="investment_chekbox_pandding">6dp</dimen>
 
     <!-- 边距 -->
