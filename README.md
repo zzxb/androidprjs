@@ -41,8 +41,6 @@ V 1.0.0
 
 参考[安装与配置](http://stormzhang.com/devtools/2014/11/25/android-studio-tutorial1/)
 
-![](images/android-colors.png)
-
 #### 关于Gradle知识的了解
 
 在首次安装Android Studio或首次创建Android工程时，会自动下载一个软件，你会发现很慢，甚至你会认为软件处于假死状态，请注意，不要强制关闭软件，因为这样会导致日后工程不能使用等问题。那么，到底是自动下载什么呢？为什么这么慢呢？
@@ -195,31 +193,84 @@ app模块是我们关注的重点
 
 #### 1. LayoutDemo之android布局
 
-1.有哪些布局类型？<br/>
+##### 有哪些布局类型？
 
 Android系统中为我们提供的五大布局：LinearLayout(线性布局)、FrameLayout(单帧布局)、AbsoluteLayout(绝对布局)、TablelLayout(表格布局)、RelativeLayout(相对布局)。其中最常用的的是LinearLayout、TablelLayout和RelativeLayout。这些布局都可以嵌套使用。<br/>
 
-如果有一个变量，里面存储的值等于另外一个变量的地址值，则，可以把这个变量看做指针。<br/>
+##### LinearLayout(线性布局)
 
-例如：声明指针变量<br/>
+线性布局是按照水平或垂直的顺序将子元素(可以是控件或布局)依次按照顺序排列，每一个元素都位于前面一个元素之后。线性布局分为两种：水平方向和垂直方向的布局。分别通过属性android:orientation="vertical" 和 android:orientation="horizontal"来设置。<br/>
 
-```Objective-C
+案例代码分析：
 
-        int *var; //声明指针变量
-        int a = 10;  //int变量
-        var = &a //a变量的引用(&)，即是a变量地址，那么p的值就为a的地址
-        NSLog(@"a变量的地址为:%p",&a);//打印a的地址：0x7fff5fbff83c
-        NSLog(@"var指针变量的值为:%p",var);//0x7fff5fbff83c
-        NSLog(@"*var的值与a的值相同,%i",*var);//10
+```xml
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_vertical|center_horizontal"
+    tools:context="zzxb.me.layoutdemo.MainActivity">
 
-```
+    <Button
+        android:id="@+id/linearLO"
+        android:text="@string/linear_name"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-那么，指针的指针变量：<br/>
+    <TextView
+        android:layout_weight="4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-```Objective-C
-        int **myPoint;//指针的指针变量
-        myPoint = &var;
-        NSLog(@"**myPoint的值与a的值相同,%i",**myPoint);//10
+    <Button
+        android:id="@+id/tableLO"
+        android:text="@string/table_name"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_weight="4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <Button
+        android:id="@+id/frameLO"
+        android:text="@string/frame_name"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_weight="4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <Button
+        android:id="@+id/relativeLO"
+        android:text="@string/relative_name"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_weight="4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <Button
+        android:id="@+id/absLO"
+        android:text="@string/abslayout_name"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
 ```
 
 #### 3.ocprj5之类基础定义以及自定方法
