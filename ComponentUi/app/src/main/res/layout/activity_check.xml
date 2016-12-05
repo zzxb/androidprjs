@@ -68,4 +68,11 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btn_checkSubmit"
+        android:layout_gravity="center"
+        android:text="提交"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

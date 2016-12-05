@@ -12,12 +12,14 @@
     tools:context="zzxb.me.componentui.ToggleActivity">
 
     <ToggleButton
+        android:id="@+id/tbn_wifi"
         android:textOff="关闭WIFI"
         android:textOn="打开WIFI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <Switch
+        android:id="@+id/sw_sound"
         android:textOff="关闭声音"
         android:textOn="打开声音"
         android:layout_width="wrap_content"

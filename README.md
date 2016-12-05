@@ -277,7 +277,7 @@ Android系统中为我们提供的五大布局：LinearLayout(线性布局)、Fr
 layout_width/layout_height:设置宽度和高度，其值有：wrap_content(适配内容大小)，match_parent(适配父容器大小),此两个属性在各个控件中为通用属性<br/>
 id:唯一标识该控件值<br/>
 orientation:设置该布局是水平布局(horizontal)还是纵向布局(vertical)<br/>
-gravity:设置控件的位置排版，常用值：center_vertical(纵向居中)|center_horizontal(水平居中)<br/>
+gravity:设置控件的对齐方式，常用值：center_vertical(纵向居中)|center_horizontal(水平居中)<br/>
 
 在\<Button\>标签中，也同样有id,layout_width以及lay_height属性。同时，还有如下常用属性：<br>
 text:设置按钮文字，这里有两种方式，一种是直接硬编码，即直接写内容，例如：<br>
@@ -301,32 +301,6 @@ android:text="@string/btnText"
 ```
 
 引用。<br/>
-
-\<TextView\>标签是文本控件，用于文字显示的控件，常用的属性也有id,text,textSize,layout_width以及lay_height属性等，同时，该控件也可以用作间隔控件与控件间距的作用。<br/>
-layout_weight:设置该控件占父控件的权重。该属性也同样用于其他控件。<br/>
-例如：<br/>
-
-```xml
-    <Button
-        android:id="@+id/relativeLO"
-        android:text="@string/relative_name"
-        android:layout_weight="1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:layout_weight="4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-
-    <Button
-        android:id="@+id/absLO"
-        android:text="@string/abslayout_name"
-        android:layout_weight="1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-```
 
 页面跳转的方式：<br/>
 
@@ -401,6 +375,278 @@ TableLayout跟TableRow 是一组搭配应用的布局，TableLayout置底，Tabl
     </TableLayout>
 ```
 
+##### FrameLayout(帧布局)
+
+帧布局被设计成在一个屏幕区域显示一个单一的项(single item)。通常FrameLayout显示一个单一的子控件，它支持的布局属性不够丰富，一般通过layout_gravity来设置子控件的位置。<br/>
+FrameLayout的子控件被绘制在一个堆栈中，最近添加进来的子控件在堆栈的顶部。<br/>
+
+图例：<br/>
+
+![](images/framelayout.jpeg)
+
+案例代码：<br/>
+
+```xml
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/movie"
+            android:contentDescription="@string/movie_desc"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/button"
+            android:contentDescription="@string/pause_desc"
+            android:layout_gravity="center"
+            />
+
+
+    </FrameLayout>
+```
+
+##### RelativeLayout(相对布局)
+
+相对布局，子控件的位置关系可以通过子控件与父控件、子控件与子控件来确定，子控件之间位置可以重叠,后面的控件会盖在前面控件之上，拓展性好，灵活方便，是使用最多的布局方式。<br/>
+
+案例代码：<br/>
+
+```xml
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/et_uname"
+            android:hint="请输入用户名"
+            android:textSize="20sp"
+            android:background="@drawable/corner_round"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/et_pwd"
+            android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/corner_round"
+            android:textSize="20sp"
+            android:layout_below="@+id/et_uname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_login"
+            android:text="登录"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:id="@+id/v1"
+            android:layout_toRightOf="@+id/btn_login"
+            android:layout_width="50dp"
+            android:layout_height="0dp" />
+
+        <Button
+            android:id="@+id/btn_reg"
+            android:layout_toRightOf="@+id/v1"
+            android:text="注册"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+```
+
+相对布局使用\<RelativeLayout\>标签，其常用属性如下：<br/>
+
+android:layout_toRightOf="@+id/name" 指定控件的右边<br/>
+android:layout_above="@+id/name" 指定控件的上边<br/>
+android:layout_below="@+id/name" 指定控件的下边<br/>
+ndroid:layout_alignLeft="@+id/name" 与指定控件左对齐<br/>
+android:layout_alignRight="@+id/name" 与指定控件右对齐<br/>
+android:layout_alignTop="@+id/name" 与指定控件顶部对齐<br/>
+android:layout_alignBottom="@+id/name" 与指定控件底部对齐<br/>
+android:layout_alignParentLeft="true" 与父控件的左边对齐<br/>
+android:layout_alignParentRight="true" 与父控件的右边对齐<br/>
+android:layout_alignParentTop="true" 与父控件顶部对齐<br/>
+android:layout_alignParentBottom="true" 与父控件底部对齐<br/>
+android:layout_centerHorizontal="true" 在父控件中水平居中<br/>
+android:layout_centerVertical="true" 在父控件中垂直居中<br/>
+android_layout_centerInParent="true" 在父控件中中部居中<br/>
+
+##### AbsoluteLayout(绝对布局)
+
+绝对布局，子控件的位置以绝对的位置定位，子控件之间可以重叠，相对于其他布局，缺少灵活性，在最新的android版本中已经不建议使用。<br/>
+
+##### 总结
+
+在android布局控制中，最常用的是线性布局和相对布局，往往它们通常是配合使用，也就是嵌套使用。
+
+#### ComponentUI之核心控件
+
+##### 文本框与编辑框
+
+android中提供了两种文本组件：一种是文本框(TextView),用于在屏幕上显示文本；另外一种是编辑框(EditText),用于在屏幕上显示可编辑的文本框。EditText是TextView的子类，所以，很多EditView上的属性在TextView上也适用。
+
+##### 文本框
+
+\<TextView\>标签是文本控件，用于文字显示的控件，常用的属性也有id,text,textSize,layout_width以及lay_height属性等，同时，该控件也可以用作间隔控件与控件间距的作用。<br/>
+layout_weight:设置该控件占父控件的权重。该属性也同样用于其他控件。<br/>
+例如：<br/>
+
+```xml
+    <Button
+        android:id="@+id/relativeLO"
+        android:text="@string/relative_name"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_weight="4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <Button
+        android:id="@+id/absLO"
+        android:text="@string/abslayout_name"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+```
+
+特殊属性说明：<br/>
+
+android:drawableLeft/Right:用于在文本框内文本的左侧(右侧)绘制制定图像。<br/>
+
+##### 编辑框
+
+\<EditText\>标签是编辑框，由于是TextView的子类，所以，很多TextView的属性也适用于编辑框。
+
+常用属性：<br/>
+
+android:hint:用于设置当编辑框中文本内容为空时，默认显示的提示文本<br/>
+android:inputType:用于指定当前编辑框输入内容的文本类型，其中常用有textPassword,phone等等<br/>
+android:singleLine:用于指定该编辑框是否为单行模式，其属性值为：true/false。<br/>
+
+##### 按钮
+
+android中提供了普通按钮和图片按钮两种按钮组件。
+
+普通按钮\<Button\>标签和图片按钮\<ImageButton\>
+
+图片按钮常用属性：<br/>
+
+android:src:图片地址
+
+##### 单选按钮
+
+在android中，单选按钮和复选框都继承了普通按钮，因此，它们都可以直接使用普通按钮支持的属性和方法。与普通按钮不同的是，它们都提供了可选中的功能。
+
+单选按钮在默认情况下，显示为一个圆形图标，并且在该图标旁边放置一些说明文字。它使用\<RadioButton\>标签。通常情况下，RadioButton控件需要与RadioGroup组件一起使用，组成一个单选按钮组。
+
+例如:<br/>
+
+```xml
+        <RadioGroup
+            android:orientation="horizontal"
+            android:id="@+id/bg_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/sexMan"
+                android:text="男"
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/sexWoman"
+                android:text="女"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/sexOther"
+                android:text="保密"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RadioGroup>
+```
+
+RadioButton常用属性：<br/>
+
+android:checked:是否选中，其值为true/false.<br/>
+
+使用单选按钮(RadioButton)有两种方式，第一种，直接在xml中布局单选按钮。这种方式常用于固定的单选值，例如：选中性别等功能。<br/>
+另外一种，代码动态生成单选按钮。这种方式比较常用于单选值是动态获取的，而非固定。<br/>
+
+第一种方式：相对简单，如上例展示。<br/>
+
+第二种方式：使用代码生成。案例如下：<br/>
+
+定义一个RadioGroup组。<br/>
+
+```xml
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="状态:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioGroup
+            android:orientation="horizontal"
+            android:id="@+id/rg_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </RadioGroup>
+
+    </LinearLayout>
+```
+
+在Activity中，代码生成RadioButton,并添加到RadioGroup中。
+
+```java
+    private RadioGroup radioGroup = null;
+    private String[] rbState = {"离职","在职","其他"};
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_radio);
+        radioGroup = (RadioGroup)findViewById(R.id.rg_state);
+        for(int i = 0;i < rbState.length;i++){
+            RadioButton rb = new RadioButton(this);
+            rb.setText(rbState[i]);
+            radioGroup.addView(rb);
+            //设置第一个单选按钮为默认选中 
+            if(i == 0){
+                radioGroup.check(rb.getId());
+            }
+        }
+
+    }
+```
 
 ## 修改日志
 - 2016-10-13:
