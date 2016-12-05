@@ -13,6 +13,12 @@
     tools:context="zzxb.me.componentui.MainActivity">
 
     <Button
+        android:id="@+id/btn_btnimage"
+        android:text="图片按钮"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
         android:id="@+id/btn_radio"
         android:text="单选按钮"
         android:layout_width="wrap_content"

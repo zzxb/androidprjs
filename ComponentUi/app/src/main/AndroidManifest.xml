@@ -25,7 +25,8 @@
         <activity android:name=".SeekActivity" />
         <activity android:name=".RatingActivity" />
         <activity android:name=".TabHostActivity" />
-        <activity android:name=".AlertActivity"></activity>
+        <activity android:name=".AlertActivity" />
+        <activity android:name=".ImageButtonActivity"></activity>
     </application>
 
 </manifest>
