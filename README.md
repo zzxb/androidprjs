@@ -319,9 +319,9 @@ TableLayout跟TableRow 是一组搭配应用的布局，TableLayout置底，Tabl
 重要的几个属性如下:<br/>
 
 ```xml
-    android:collapseColumns="1,3" 隐藏第二列和第4列的按钮
+    android:collapseColumns="1,3" 隐藏第二列和第4列的控件
     android:stretchColumns="0,2,4" 第一列和三列以及第五列的空白textview被拉伸
-    android:shrinkColumns="1,3"  第二列和第4列的按钮被收缩
+    android:shrinkColumns="1,3"  第二列和第4列的控件被收缩
 ```
 
 案例代码：
