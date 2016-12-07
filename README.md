@@ -493,7 +493,15 @@ android_layout_centerInParent="true" 在父控件中中部居中<br/>
 
 ##### 总结
 
-在android布局控制中，最常用的是线性布局和相对布局，往往它们通常是配合使用，也就是嵌套使用。
+在android布局控制中，最常用的是线性布局和相对布局，往往它们通常是配合使用，也就是嵌套使用。<br/>
+
+##### 关于layout_gravity与gravity的区别
+
+从名字上可以看到，android:gravity是对元素本身说的，元素本身的文本显示在什么地方靠着换个属性设置，不过不设置默认是在左侧的。<br/>
+
+android:layout_gravity是相对与它的父元素说的，说明元素显示在父元素的什么位置。<br/>
+
+比如说button： android:layout_gravity 表示按钮在界面上的位置。 android:gravity表示button上的字在button上的位置。<br/>
 
 #### ComponentUI之核心控件
 
@@ -650,6 +658,170 @@ android:checked:是否选中，其值为true/false.<br/>
     }
 ```
 
+#### FragmentDemo之Fragment(片段)
+
+##### 什么是片段
+
+Fragment 表示 Activity 中的行为或用户界面部分。您可以将多个片段组合在一个 Activity 中来构建多窗格 UI，以及在多个 Activity 中重复使用某个片段。您可以将片段视为 Activity 的模块化组成部分，它具有自己的生命周期，能接收自己的输入事件，并且您可以在 Activity 运行时添加或移除片段（有点像您可以在不同 Activity 中重复使用的“子 Activity”）
+
+##### 创建片段
+
+要想创建片段，您必须创建 Fragment 的子类（或已有其子类）。Fragment 类的代码与 Activity 非常相似。它包含与 Activity 类似的回调方法，如 onCreate()、onStart()、onPause() 和 onStop()。实际上，如果您要将现有 Android 应用转换为使用片段，可能只需将代码从 Activity 的回调方法移入片段相应的回调方法中。
+
+通常，您至少应实现以下生命周期方法：<br/>
+
+onCreateView()<br/>
+系统会在片段首次绘制其用户界面时调用此方法。 要想为您的片段绘制 UI，您从此方法中返回的 View 必须是片段布局的根视图。如果片段未提供 UI，您可以返回 null。
+
+##### 生命周期
+图例：<br/>
+
+![](images/fragment_lifecycle.png)
+
+##### 具体实现
+
+1.创建Fragment.
+
+如下图：
+
+![](images/createfragment.png)
+
+当创建完成后，会生成两个文件,.java文件和.xml文件,顾名思义，一个继承Fragment类文件，一个是该fragment的布局文件.
+
+例如：<br/>
+
+```java
+public class HeaderFragment extends Fragment {
+
+
+    public HeaderFragment() {
+        // Required empty public constructor
+    }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_header, container, false);
+    }
+
+}
+```
+
+onCreateView() 的 container 参数是您的片段布局将插入到的父 ViewGroup（来自 Activity 的布局）。savedInstanceState 参数是在恢复片段时，提供上一片段实例相关数据的 Bundle。
+
+inflate() 方法带有三个参数：
+
+您想要扩展的布局的资源 ID；
+将作为扩展布局父项的 ViewGroup。传递 container 对系统向扩展布局的根视图（由其所属的父视图指定）应用布局参数具有重要意义；
+指示是否应该在扩展期间将扩展布局附加至 ViewGroup（第二个参数）的布尔值。（在本例中，其值为 false，因为系统已经将扩展布局插入 container — 传递 true 值会在最终布局中创建一个多余的视图组。）
+
+```xml
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="me.zzxb.fragmentdemo.myfrag.HeaderFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:text="这是头fragment"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>
+```
+
+fragment的布局文件，就是一个标准的布局文件，与Activity的布局文件格式基本一致。所以，我们认为fragment与Activity是一种宿主关系。
+
+2.添加片段到Activity中
+
+已经了解了如何创建提供布局的片段。接下来，需要将该片段添加到Activity 中。这一步骤有两种方式。<br/>
+
+#### 注意宿主Activity一定要继承android.support.v4.app.FragmentActivity类，而非标准的Activity类.
+
+##### 与Activity通信
+
+Activity 也可以使用 findFragmentById() 或 findFragmentByTag()，通过从 FragmentManager 获取对 Fragment 的引用来调用片段中的方法。例如：
+
+```java
+ExampleFragment fragment = (ExampleFragment) getFragmentManager().findFragmentById(R.id.example_fragment);
+
+```
+
+第一种：在 Activity 的布局文件内声明片段<br/>
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="me.zzxb.fragmentdemo.MainActivity">
+
+    <fragment
+        android:id="@+id/fr_header"
+        android:name="me.zzxb.fragmentdemo.myfrag.HeaderFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <fragment
+        android:id="@+id/fr_content"
+        android:name="me.zzxb.fragmentdemo.myfrag.ContentFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:text="提交"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>
+```
+
+<fragment> 中的 android:name 属性指定要在布局中实例化的 Fragment 类。
+当系统创建此 Activity 布局时，会实例化在布局中指定的每个片段，并为每个片段调用 onCreateView() 方法，以检索每个片段的布局。系统会直接插入片段返回的 View 来替代 <fragment> 元素。
+注：每个片段都需要一个唯一的标识符，重启 Activity 时，系统可以使用该标识符来恢复片段（您也可以使用该标识符来捕获片段以执行某些事务，如将其移除）。 可以通过三种方式为片段提供 ID：
+为 android:id 属性提供唯一 ID。
+为 android:tag 属性提供唯一字符串。
+如果您未给以上两个属性提供值，系统会使用容器视图的 ID。
+
+第二种方式：通过编程方式将片段添加到某个现有 ViewGroup
+
+```java
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        ContentFragment contentFragment = new ContentFragment();
+        fragmentTransaction.add(R.id.activity_main,contentFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+```
+
+你可以在 Activity 运行期间随时将片段添加到 Activity 布局中。您只需指定要将片段放入哪个 ViewGroup。
+要想在您的 Activity 中执行片段事务（如添加、移除或替换片段），您必须使用 FragmentTransaction 中的 API。您可以像下面这样从 Activity 获取一个 FragmentTransaction 实例：
+
+```java
+FragmentManager fragmentManager = getFragmentManager();
+FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+```
+
+然后，您可以使用 add() 方法添加一个片段，指定要添加的片段以及将其插入哪个视图。例如：
+
+```java
+        ContentFragment contentFragment = new ContentFragment();
+        fragmentTransaction.add(R.id.activity_main,contentFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+```
+
+传递到 add() 的第一个参数是 ViewGroup，即应该放置片段的位置，由资源 ID 指定，第二个参数是要添加的片段。
+一旦您通过 FragmentTransaction 做出了更改，就必须调用 commit() 以使更改生效。
+
+#### 注意：如果使用代码方式添加片段，一定要继承import android.app.Fragment类，而非android.support.v4.app.Fragment类
+
 ## 修改日志
 - 2016-10-13:
 - [x] 创建演示项目,并对一些配置文件进行了注解。
@@ -660,8 +832,7 @@ android:checked:是否选中，其值为true/false.<br/>
 以下是在编写案例中收集的资源,对深入理解与运用有帮助
 
 - [Gradle基础](http://stormzhang.com/devtools/2014/12/18/android-studio-tutorial4/)
-- [Google Objective-C Style Guide 中文版](http://zh-google-styleguide.readthedocs.io/en/latest/google-objc-styleguide/)
-- [iOS开发60分钟入门](https://github.com/qinjx/30min_guides/blob/master/ios.md)
+- [官方API指南 中文版](https://developer.android.com/guide/index.html)
 
 
 ------
