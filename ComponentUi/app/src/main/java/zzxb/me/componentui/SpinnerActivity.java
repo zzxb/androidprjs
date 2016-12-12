@@ -43,8 +43,6 @@ public class SpinnerActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // 这个一直没有触发，我也不知道什么时候被触发。
-                //在官方的文档上说明，为back的时候触发，但是无效，可能需要特定的场景
             }
         });
 

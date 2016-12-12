@@ -472,6 +472,7 @@ FrameLayout的子控件被绘制在一个堆栈中，最近添加进来的子控
 
 相对布局使用\<RelativeLayout\>标签，其常用属性如下：<br/>
 
+android:layout_toLeftOf="@+id/name" 指定控件的左边<br/>
 android:layout_toRightOf="@+id/name" 指定控件的右边<br/>
 android:layout_above="@+id/name" 指定控件的上边<br/>
 android:layout_below="@+id/name" 指定控件的下边<br/>
@@ -656,6 +657,394 @@ android:checked:是否选中，其值为true/false.<br/>
         }
 
     }
+```
+
+##### 复选框(CheckBox)
+
+在默认情况下，复选框显示为一个方块图标，并且在该图标旁边放置一些说明性文字。与单选框按钮唯一不同的是，复选框可以进行多选设置，每一个复选框都提供“选中”和“不选中”两种状态。CheckBox类同样是Button的子类，所以，可以直接使用Button支持的各种属性。
+
+与单选按钮类似，复选框也有两种方式添加到屏幕中，一种是通过在XML布局文件中使用\<CheckBox\>标签添加。
+
+例如：
+
+```xml
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/checkViewName"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:id="@+id/sportsChecksGroup"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <CheckBox
+            android:text="@string/footBallName"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:text="@string/basketBallName"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:text="@string/ppBallName"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+```
+
+与单选按钮不同的是，复选按钮没有类似单选按钮中的\<RadioGruop\>标签，如果要想实现复选框类似的分组，需要使用\<LinearLayout\>等布局标签。即一个布局标签内的所有复选框控件为一组。
+
+另一种方式，是在JAVA文件中，通过代码实现动态的加载复选框，如下：<br/>
+
+```xml
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/check2Name"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/mingXingChecksGruop"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+```
+
+则java代码为：<br/>
+
+```java
+private String[] mingXings = {"陈奕迅","张学友","王菲"};
+private LinearLayout mingXingChecksGroup = null;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_checks);
+        mingXingChecksGroup = (LinearLayout) findViewById(R.id.mingXingChecksGruop);
+        for(String mingXing : mingXings){
+            CheckBox cb = new CheckBox(this);
+            cb.setText(mingXing);
+            cb.setTextSize(16);
+            mingXingChecksGroup.addView(cb);
+        }
+    }
+```
+
+复选框的动态加载方式，与单选按钮类似。
+
+当点击按钮获得复选框值，也与单选按钮类似，代码如下：
+
+```java
+        btnChecksSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for(int i = 0;i < mingXingChecksGroup.getChildCount();i++){
+                    CheckBox cb = (CheckBox)mingXingChecksGroup.getChildAt(i);
+                    if(cb.isChecked()){
+                        Log.i("mingxing",cb.getText().toString());
+                    }
+                }
+        });
+```
+
+##### 选择按钮:ToggleButton和Switch
+
+ToggleButton和Switch按钮非常相近，只是在表现样式上有区别，如下图：
+
+ToggleButton:<br/>
+![](images/toggle-button.png)
+
+Switch:<br/>
+![](images/switchbutton.png)
+
+这两个控件只有在表现形式上有些区别，其他的包括属性，使用方式上基本一致。它们通用常用属性，如下：
+
+```xml
+            android:textOff="关闭WIFI"
+            android:textOn="打开WIFI"
+```
+
+常用的监听方法：
+
+```java
+        tbnWifi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    Log.i("wifi",tbnWifi.getTextOn().toString());
+;                }else{
+                    Log.i("wifi",tbnWifi.getTextOff().toString());
+                }
+            }
+        });
+```
+
+获取按钮提交后的值，如下：<br/>
+
+```java
+tbnWifi = (ToggleButton)findViewById(R.id.tbn_wifi);
+Log.i("tbnwifistate",""+tbnWifi.isChecked());
+```
+
+##### SeekBar(拖动条)和RatingBar(星级评分条)
+
+在Android中，提供了两种允许用户通过拖动来改变进度的控件，分别是SeekBar(拖动条)和RatingBar(星级评分条)。
+
+如图:<br/>
+
+拖动条：<br/>
+![](images/seekbar.png)
+
+星级评分条:<br/>
+![](images/ratingbar.png)
+
+拖动条允许用户拖动滑块来改变值，通常用于实现对某种数值的调节。比如：调节图片大小、透明度或音量等。
+
+在XML布局文件中使用\<SeekBar\>标签。
+
+```xml
+    <SeekBar
+        android:layout_marginTop="30dp"
+        android:id="@+id/seekbar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:progress="30" />
+```
+
+常用属性：
+
+```xml
+android:max : 最大值
+android:progress : 当前值
+```
+
+在JAVA文件中常用监听：<br/>
+
+```java
+private SeekBar.OnSeekBarChangeListener seekBarChange = new SeekBar.OnSeekBarChangeListener() {
+
+        //当滑动停止时调用该方法
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+        }
+
+        //当开始滑动时调用该方法
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+        }
+
+        //当滑动值发生变化时调用该方法
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress,
+                                      boolean fromUser) {
+        }
+    };
+```
+
+星级评分条与拖动条类似，都允许用户拖动来改变进度，所不同的是，星级评分条通过星星图案表示进度。
+
+在XML布局文件中使用\<RatingBar\>标示星级评分条。
+
+```xml
+    <RatingBar
+        android:id="@+id/rbRating1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:isIndicator="false"
+        android:max="100"
+        android:numStars="4"
+        android:rating="2.5"
+        android:stepSize="0.5" />
+```
+
+常用属性：
+
+```xml
+        android:isIndicator : 是否允许用户改变星级，true为不允许改变
+        android:max         : 最大值
+        android:numStars    : 共有多少个星
+        android:rating      : 默认的星级
+        android:stepSize    : 步进值
+```
+
+常用监听方法：
+
+```java
+    public void onRatingChanged(RatingBar ratingBar, float rating,
+                                boolean fromUser) {
+    }
+```
+
+提交获得值常用方法：
+
+```java
+   getRating():获得等级,表示选中了几颗星。
+   getProgress():获得进度值.
+```
+
+##### ImageView(图像视图)
+
+图像视图用于在屏幕中显示任何Drawable对象，通常用来显示图片。在XML布局文件中，使用\<ImageView\>标签。
+
+常用属性：
+
+```xml
+  android:adjustViewBounds : 用于设置ImageView是否调整自己的边界来保持所显示图片的长宽比
+  android:maxHeight        : 最大高度
+  android:maxWidth         : 最大宽度
+  android:scaleType        : 用于设置所显示图片如何缩放或移动以适应ImageView的大小
+  android:src              : 地址id
+```
+
+##### AutoCompleteTextView(自动完成文本框)
+
+自动完成文本框(AutoComleteTextView),用于实现允许用户输入一定字符后，显示一个下拉菜单，供用户从中选择，当用户选择某个选项后，按用户选择自动填写该文本框。AutoCompleteTextView控件继承于EditText,所以它支持所有EditView组件提供的属性。<br/>
+
+在XML布局文件中，使用\<AutoCompleteTextView\>标签创建，常用属性：
+
+```xml
+   android:completionHint          : 为弹出的下拉菜单指定提示标题
+   android:completionThreshold     : 指定用户至少输入几个字符才会显示提示
+```
+
+在JAVA代码中具体实现：<br/>
+
+1.获得控件对象<br/>
+```java
+autotext=(AutoCompleteTextView)findViewById(R.id.autotext);
+```
+
+2.设置数据源<br/>
+```java
+String[] autoStrings=new String[]{"New York","Tokyo","beijing","london","Seoul Special","Los Angeles"};
+```
+
+3.创建ArrayAdapter适配器,设置ArrayAdapter，并且设定以单行下拉列表风格展示（第二个参数设定）。<br/>
+```java
+ArrayAdapter<String> adapter=new ArrayAdapter<String>(AutoTextActivity.this,
+                android.R.layout.simple_dropdown_item_1line, autoStrings);
+```
+
+4.将适配器装配到组件中<br/>
+```java
+autotext.setAdapter(adapter);
+```
+
+同时，在android中还有一种是多选选项(\<MultiAutoCompleteTextView\>)与\<AutoCompleteTextView\>基本一致。
+
+##### Spinner(列表选择框)
+
+列表选择框(Spinner)相当于在网页中常见的下拉列表框，通常用于提供一系列可选择的列表项供用户进行选择。
+
+在XML布局文件中使用\<S	pinner\>标签添加，如下：
+
+```xml
+    <Spinner
+        android:id="@+id/spinnerBase1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries = "@array/beijing"
+        android:spinnerMode="dropdown" />
+```
+
+常用属性：<br/>
+
+```xml
+	android:spinnerMode : 下拉框显示样式，dropdown默认下拉式，dialog弹出对话框模式
+	android:entries     : 绑定静态数据源
+```
+
+在列表选择框中，数据源有两种：第一种配置静态数据源。第二种在java代码中配置动态数据源。
+
+静态数据源配置方式：<br/>
+
+1.在strings.xml中配置\<string-array\>标签<br/>
+
+```xml
+    <string-array name="beijing">
+        <item>朝阳区</item>
+        <item>海淀区</item>
+        <item>房山区</item>
+        <item>丰台区</item>
+        <item>东城区</item>
+        <item>西城区</item>
+    </string-array>
+```
+
+2.\<Spinner\>的属性中绑定<br/>
+
+```xml
+	android:entries = "@array/beijing"
+```
+
+Java代码中动态绑定数据源方式:<br/>
+
+1.获得控件对象<br/>
+```java
+spinner1 = (Spinner) findViewById(R.id.spinnerBase);
+```
+
+2.设置数据源<br/>
+```java
+String[] autoStrings=new String[]{"New York","Tokyo","beijing","london","Seoul Special","Los Angeles"};
+```
+
+3.创建ArrayAdapter适配器,设置ArrayAdapter，并且设定以单行下拉列表风格展示（第二个参数设定）。<br/>
+```java
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                SpinnerActivity.this, android.R.layout.simple_spinner_item,autoStrings);
+```
+
+4.将适配器装配到组件中<br/>
+```java
+spinner1.setAdapter(adapter);
+```
+
+##### ProgressBar(进度条)
+
+当一个应用在后台执行时，前台界面不会有任何信息。这时用户根本不知道程序是否在执行以及执行进度等，因此需要使用进度条来提示程序执行的进度。在A	ndroid中，进度条(ProgressBar)用于用户显示某个耗时操作完成的百分比。<br/>
+
+在XML布局文件中通过\<ProgressBar\>标签。<br/>
+
+```xml
+    <ProgressBar
+        android:id="@+id/pbHor"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:progress="20"
+        android:secondaryProgress="60" />
+```
+
+常用属性：<br/>
+
+```xml
+	style : 可以为进度指定风格。@android:style/Widget.ProgressBar.Horizontal(粗水平长条进度条)、@android:style/Widget.ProgressBar.Small(小跳跃、旋转画面进度条)、@android:style/Widget.ProgressBar.Large(大跳跃、旋转画面进度条)
+	android:max : 最大值
+	android:progress : 当前进度值
+	android:secondaryProgress : 第二块进度条值
 ```
 
 #### FragmentDemo之Fragment(片段)

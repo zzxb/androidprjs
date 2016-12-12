@@ -17,6 +17,7 @@ public class ToggleActivity extends Activity {
         setContentView(R.layout.activity_toggle);
         tbnWifi = (ToggleButton)findViewById(R.id.tbn_wifi);
         swSound = (Switch)findViewById(R.id.sw_sound);
+        Log.i("tbnwifistate",""+tbnWifi.isChecked());
 
         tbnWifi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
