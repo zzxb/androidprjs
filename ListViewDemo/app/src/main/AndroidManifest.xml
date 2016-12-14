@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.zzxb.luncherdemo">
+    package="me.zzxb.listviewdemo">
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/logo"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-        </activity>
-        <activity android:name=".WelcomeActivity"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ListViewWithOutImageActivity" />
+        <activity android:name=".ListViewWithImageActivity" />
+        <activity android:name=".GoodsDetailActivity" />
+        <activity android:name=".CustomListViewActivity"></activity>
     </application>
 
 </manifest>

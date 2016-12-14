@@ -1047,6 +1047,285 @@ spinner1.setAdapter(adapter);
 	android:secondaryProgress : 第二块进度条值
 ```
 
+##### TabHost(选项卡)
+
+TabHost可以方便地在窗口上放置多个标签页，每个标签页相当于获得了一个与外部容器大小相同的组件摆放区域.<br/>
+
+如下图:<br/>
+
+![](images/tabhost1.png)
+
+![](images/tabhost2.gif)
+
+在XML布局文件中，选项卡常用的标签有\<TabHost\>和\<TabWidget\>两个标签，通常这两个标签需要配合使用。
+
+代码如下：<br/>
+
+```xml
+    <TabHost
+        android:id="@+id/tabHost"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/tab1"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tab2"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/tab3"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TabWidget>
+
+
+        </LinearLayout>
+    </TabHost>
+```
+
+布局文件说明：<br/>
+1.将TabHost标签作为最外层包裹元素。<br/>
+2.在其里面创建一个LinearLayout纵向线性布局<br/>
+3.在线性布局下创建两个子元素，一个是FrameLayout帧式布局，在此布局下创建多个子页面布局(LinearLayout)，相当于多个Tab子页面。二个是创建TabWidget,相当于切换按钮。<br/>
+
+##### 注意：<br/>
+
+1.TabHost标签自带id值必须是：<br/>
+
+```xml
+android:id="@+id/tabHost"
+``` 
+
+2.TabWidget标签自带id值必须是:<br/>
+
+```xml
+android:id="@android:id/tabs"
+```
+
+3.如果想将选项按钮放置在最下方，必须设置如下：<br/>
+
+```xml
+    <TabHost
+        android:id="@+id/tabHost"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true" />
+```
+
+将TabWeight放置在FrameLayout之后。
+
+在JAVA文件中装配步骤：<br/>
+
+1.Activity继承ActivityGroup类。<br/>
+
+```java
+public class TabHostActivity extends ActivityGroup
+```
+
+2.获得TabHost对象实例.<br/>
+
+```java
+tabHost = (TabHost)findViewById(R.id.tabHost);
+```
+
+3.设置装配管理对象。<br/>
+
+```java
+tabHost.setup(this.getLocalActivityManager());
+```
+
+4.装配每一个Tab。<br/>
+
+```java
+TabHost.TabSpec ts = tabHost.newTabSpec("tab1").setIndicator("首页").setContent(new Intent(this,MainActivity.class));
+tabHost.addTab(ts);
+```
+
+"tab1"是选项卡的唯一标识，只需唯一即可，与XML中的tab1无关。<br/>
+
+##### Toast(消息提示框)与AlertDialog(对话框)
+
+在项目开发中，经常需要将一些临时信息显示给用户，虽然使用一些基本组件也能达到显示信息的目的，但是这样做不仅会增加代码量，而且对于用户来说也不够友好。为此，Android提供了消息提示框和对话框显示这些信息。同时，它们没有对应的XML布局，都是通过JAVA代码来实现的。<br/>
+
+消息提示框：<br/>
+
+```java
+Toast.makeText(AlertActivity.this,"这是提示框", Toast.LENGTH_SHORT).show();
+```
+
+对话框：<br/>
+
+```java
+AlertDialog.Builder ab = new AlertDialog.Builder(AlertActivity.this);
+ab.setTitle("对话框");
+ab.setMessage("这是一个普通对话框!");
+ab.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+	@Override
+ 	public void onClick(DialogInterface dialog, int which) {
+     //处理业务的
+     Toast.makeText(AlertActivity.this, "你点击了确定",Toast.LENGTH_SHORT).show();
+  }
+});
+ab.setNeutralButton("取消", new DialogInterface.OnClickListener() {
+   @Override
+   public void onClick(DialogInterface dialog, int which) {
+     Toast.makeText(AlertActivity.this,"你点击的which值:"+which,Toast.LENGTH_SHORT).show();
+   }
+});
+ab.create().show();
+```
+
+#### LuncherDmeo之引导页面案例
+
+在Android项目中，经常出现加载应用前显示全屏图片的页面，在几秒之后，立刻跳转到项目首页的情况，我们管这种页面叫做项目引导页。<br/>
+
+项目引导页制作步骤如下：<br/>
+
+1.创建将引导页图片导入到资源目录中(drawable目录或mimap目录)<br/>
+2.创建引导页Activity类以及layout布局文件(XML)<br/>
+3.设置引导页XML布局文件的背景图。<br/>
+
+```xml
+android:background="@drawable/start"
+```
+
+4.设置AndroidManifest.xml配置文件，将初始页改为引导页Activity.<br/>
+
+```xml
+        <activity android:name=".WelcomeActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+```
+
+将引导页设为全屏显示：<br/>
+
+```xml
+android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+```
+
+5.编写引导页Activity类。<br/>
+
+5.1 创建Hander类
+
+```java
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            //引导页跳转到下一页
+            Intent i = new Intent(WelcomeActivity.this, MainActivity.class);
+            startActivity(i);
+            finish();
+            super.handleMessage(msg);
+        }
+    };
+```
+
+5.2 在onCreate()方法中，编写定时跳转.<br/>
+
+```java
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(5000);
+                    handler.sendEmptyMessage(0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
+```
+
+完整代码如下：
+
+```java
+public class WelcomeActivity extends Activity {
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            Intent i = new Intent(WelcomeActivity.this, MainActivity.class);
+            startActivity(i);
+            finish();
+            super.handleMessage(msg);
+        }
+    };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_welcome);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(5000);
+                    handler.sendEmptyMessage(0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
+    }
+}
+```
+
+配置应用logo以及应用名字的方式：<br/>
+
+在AndroidManifest.xml文件中。<br/>
+
+```xml
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+```
+
+其中icon属性为应用logo地址，label属性为app名字.<br/>
+
 #### FragmentDemo之Fragment(片段)
 
 ##### 什么是片段
