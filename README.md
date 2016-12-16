@@ -919,7 +919,7 @@ private SeekBar.OnSeekBarChangeListener seekBarChange = new SeekBar.OnSeekBarCha
 
 ##### AutoCompleteTextView(自动完成文本框)
 
-自动完成文本框(AutoComleteTextView),用于实现允许用户输入一定字符后，显示一个下拉菜单，供用户从中选择，当用户选择某个选项后，按用户选择自动填写该文本框。AutoCompleteTextView控件继承于EditText,所以它支持所有EditView组件提供的属性。<br/>
+自动完成文本框(AutoComleteTextView),用于实现允许用户输入一定字符后，显示一个下拉菜单，供用户从中选择，当用户选择某个选项后，按用户选择自动填写该文本框。AutoCompleteTextView控件继承于EditText,所以它支持所有EditText组件提供的属性。<br/>
 
 在XML布局文件中，使用\<AutoCompleteTextView\>标签创建，常用属性：
 
@@ -1505,4 +1505,3 @@ FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
 ------
 建议使用Android Studio开发工具。
-
