@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">IntentCase</string>
+    <string name="callPhoneValue">打客服电话</string>
+</resources>

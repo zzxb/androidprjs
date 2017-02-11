@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TouchEventCase</string>
+    <string name="touchEventValue">点击长按</string>
+</resources>

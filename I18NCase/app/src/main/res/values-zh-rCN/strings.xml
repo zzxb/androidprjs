@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">I18NCase</string>
+    <string name="hello_world">我的国际化！</string>
+</resources>

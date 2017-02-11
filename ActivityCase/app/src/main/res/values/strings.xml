@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ActivityCase</string>
+    <string name="userNameValue">请输入用户名：</string>
+    <string name="passWordValue">请输入密码:</string>
+    <string name="registerValue">提交</string>
+    <string name="userNameDetailValue">用户名:</string>
+    <string name="zhanWeiValue">未知站位</string>
+    <string name="passWordDetailValue">密码：</string>
+    <string name="backViewValue">返回上一页</string>
+</resources>
