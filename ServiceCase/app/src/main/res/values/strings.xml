@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ServiceCase</string>
+    <string name="btnStartValue">启动服务</string>
+    <string name="btnStopValue">停止服务</string>
+    <string name="btnBindValue">绑定服务</string>
+    <string name="btnUnBindValue">解绑服务</string>
+</resources>

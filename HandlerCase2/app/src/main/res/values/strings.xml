@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">HandlerCase2</string>
+    <string name="textViewValue">进度条：</string>
+</resources>
