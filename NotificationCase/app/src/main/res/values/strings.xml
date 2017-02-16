@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">NotificationCase</string>
+    <string name="notificationDetailTextViewValue">通知详情</string>
+</resources>

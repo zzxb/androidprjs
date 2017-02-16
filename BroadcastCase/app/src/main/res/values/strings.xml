@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">BroadcastCase</string>
+    <string name="sendMsgValue">发送广播</string>
+</resources>
