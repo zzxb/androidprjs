@@ -10,6 +10,7 @@ public class MainActivity extends Activity {
     private Button btnList = null;
     private Button btnList2 = null;
     private Button btnCList = null;
+    private Button btnList3 = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +19,7 @@ public class MainActivity extends Activity {
         btnList = (Button)findViewById(R.id.btn_list);
         btnList2 = (Button)findViewById(R.id.btn_list2);
         btnCList = (Button)findViewById(R.id.btn_clist);
+        btnList3 = (Button)findViewById(R.id.btn_list3);
 
         btnList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +44,15 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this,CustomListViewActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnList3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this,ListViewWtichForRowObjectActivity.class);
                 startActivity(intent);
             }
         });

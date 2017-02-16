@@ -18,7 +18,9 @@
         <activity android:name=".ListViewWithOutImageActivity" />
         <activity android:name=".ListViewWithImageActivity" />
         <activity android:name=".GoodsDetailActivity" />
-        <activity android:name=".CustomListViewActivity"></activity>
+        <activity android:name=".CustomListViewActivity" />
+        <activity android:name=".ListViewWtichForRowObjectActivity"/>
+        <activity android:name=".DetailProductActivity" />
     </application>
 
 </manifest>

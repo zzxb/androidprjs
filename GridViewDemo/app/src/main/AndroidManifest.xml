@@ -15,7 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GridViewWithImageActivity"></activity>
+        <activity android:name=".GridViewWithImageActivity" />
+        <activity android:name=".GridViewWithOutImageActivity"></activity>
     </application>
 
 </manifest>
