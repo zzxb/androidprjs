@@ -23,8 +23,8 @@
         android:layout_height="wrap_content"
         android:divider="#ffce5dff"
         android:dividerHeight="1dp"
-        android:footerDividersEnabled="false"
-        android:headerDividersEnabled="false">
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true">
     </ListView>
 
 </LinearLayout>

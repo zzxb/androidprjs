@@ -28,5 +28,9 @@ public class ListViewWithOutImageActivity extends Activity {
                 Toast.makeText(ListViewWithOutImageActivity.this,items[i],Toast.LENGTH_SHORT).show();
             }
         });
+        //当设置android:footerDividersEnabled="true"，显示分割线
+        lv_data.addFooterView(new View(this));
+        //当设置android:headerDividersEnabled="true"，显示分割线
+        lv_data.addHeaderView(new View(this));
     }
 }
