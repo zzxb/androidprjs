@@ -1,11 +1,9 @@
 package me.zzxb.fragmentdemo;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
-import android.view.View;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -29,7 +27,7 @@ public class MainActivity extends FragmentActivity {
 //            }
 //        });
 
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         ContentFragment contentFragment = new ContentFragment();
         fragmentTransaction.add(R.id.activity_main,contentFragment);
