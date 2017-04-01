@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">IntentCase3</string>
+    <string name="intentInfo">隐式intent之浏览网页</string>
+    <string name="intentInfo2">隐式Intent之调用其他activity</string>
+</resources>
