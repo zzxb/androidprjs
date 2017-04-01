@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">IntentCase2</string>
+    <string name="intentInfo">隐式Intent调用浏览器</string>
+</resources>
