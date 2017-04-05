@@ -2514,10 +2514,58 @@ Activity、Service和BroadcastReceiver能定义多个Intent过滤器来通知系
 
 **过滤器中包含的域与Intent对象中动作、数据和分类域相对应。**
 
+##### 案例分析
 
+###### 隐式跳转
 
+AndroidManifest.xml
 
+```
+<activity android:name=".OtherActivity">
+<intent-filter>
+<action android:name="me.zzxb.intentcase3.OtherActivity" />
+<category android:name="android.intent.category.DEFAULT" />
+</intent-filter>
+</activity>
+```
 
+Java代码跳转
+
+```
+Intent intent = new Intent("me.zzxb.intentcase3.OtherActivity");
+startActivity(intent);
+```
+
+###### 调用浏览器应用
+
+AndroidManifest.xml
+
+```
+<activity android:name=".BrowserActivity">
+<intent-filter>
+<action android:name="android.intent.action.VIEW" />
+<category android:name="android.intent.category.DEFAULT" />
+<category android:name="android.intent.category.BROWSABLE" />
+</intent-filter>
+</activity>
+```
+
+java代码：
+
+```
+Uri uri= Uri.parse("http://www.baidu.com");
+Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+startActivity(intent);
+```
+
+###### 调用打电话功能
+
+```
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:10086"));
+                startActivity(intent);
+```
 
 
 
