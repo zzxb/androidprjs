@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="me.zzxb.resourcedemo2.MainActivity">
+
+    <Button
+        android:text="失真"
+        android:background="@drawable/up"
+        android:layout_width="match_parent"
+        android:layout_height="500px" />
+
+    <Button
+        android:text="不失真"
+        android:background="@drawable/up1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/myZan"
+        android:background="@drawable/zan_selector"
+        android:button="@null"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
+
+</LinearLayout>
