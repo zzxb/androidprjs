@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="java:comp/env/jdbc/skmysql"/>
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="mappingLocations">
+            <list>
+                <value>classpath:me/zzxb/pojo/Txls.hbm.xml</value>
+                <value>classpath:me/zzxb/pojo/Users.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <value>
+                <!-- hibernate.hbm2ddl.auto=update -->
+                hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
+                hibernate.show_sql=true
+                hibernate.format_sql=true
+                hibernate.connection.autocommit=true
+            </value>
+        </property>
+    </bean>
+
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!--hibernate4非查询的事物管理配置-->
+
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="save*" propagation="REQUIRED" />
+            <tx:method name="add*" propagation="REQUIRED" />
+            <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="del*" propagation="REQUIRED" />
+            <tx:method name="find*" propagation="REQUIRED" read-only="true" />
+            <tx:method name="get*" propagation="REQUIRED" read-only="true" />
+            <tx:method name="page*" propagation="REQUIRED" read-only="true" />
+            <tx:method name="createHQLQuery" propagation="REQUIRED" />
+            <tx:method name="createSQLQuery" propagation="REQUIRED" />
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <!--* me.zzxb.service.*.*(..)的意思是:me.zzxb.service包下的所有类的所有方法-->
+        <aop:pointcut id="txPointcut" expression="execution(* me.zzxb.service.*.*(..))" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
+    </aop:config>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+</beans>

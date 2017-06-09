@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="me.zzxb.pojo.Users" table="Users" schema="skdb" dynamic-update="true" dynamic-insert="true">
+        <id name="userid">
+            <column name="userid" sql-type="int(11)"/>
+        </id>
+        <property name="uname">
+            <column name="uname" sql-type="varchar(50)" length="50"/>
+        </property>
+        <property name="upwd">
+            <column name="upwd" sql-type="varchar(50)" length="50"/>
+        </property>
+        <property name="addtime">
+            <column name="addtime" sql-type="datetime" not-null="false"/>
+        </property>
+        <set name="txlsByUserid" inverse="true" lazy="true">
+            <key>
+                <column name="userid"/>
+            </key>
+            <one-to-many not-found="ignore" class="me.zzxb.pojo.Txls"/>
+        </set>
+    </class>
+</hibernate-mapping>
