@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">VolleyDemo1</string>
+    <string name="userNameInfo">请输入用户名:</string>
+    <string name="upwdInfo">请输入密码:</string>
+    <string name="loginInfo">登录</string>
+    <string name="regInfo">注册</string>
+    <string name="regUserNameInfo">请输入用户名：</string>
+    <string name="regPassWordInfo">请输入密码：</string>
+    <string name="submitInfo">提交</string>
+    <string name="regRePassWordInfo">请再次输入密码：</string>
+</resources>
