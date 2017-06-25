@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.toolbox.Volley;
 
 import java.util.List;
 
@@ -23,9 +24,13 @@ import me.zzxb.pullrefreshdemo2.tools.HttpUtil;
  */
 
 public class ProductAdapter extends BaseAdapter {
-    private RequestQueue requestQueue;
     private Context context;
     private List<Product> data;
+
+    public ProductAdapter(Context context, List<Product> data) {
+        this.context = context;
+        this.data = data;
+    }
 
     @Override
     public int getCount() {
@@ -55,6 +60,8 @@ public class ProductAdapter extends BaseAdapter {
         TextView pprice = (TextView)convertView.findViewById(R.id.pprice);
 
         Product p = data.get(position);
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context.getApplicationContext());
 
         pimg.setImageUrl(HttpUtil.API_URL + "/" + p.getPsimage(),new ImageLoader(requestQueue,new BitmapCache()));
 

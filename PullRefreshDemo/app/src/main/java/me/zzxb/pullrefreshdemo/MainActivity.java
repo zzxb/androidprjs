@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -137,7 +138,8 @@ public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefre
         });
 
         // Adding request to request queue
-        MyApplication.getInstance().addToRequestQueue(req);
+        //MyApplication.getInstance().addToRequestQueue(req);
+        Volley.newRequestQueue(getApplicationContext()).add(req);
     }
 
 }
